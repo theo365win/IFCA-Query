@@ -1,0 +1,23 @@
+BEGIN TRAN
+update mgr.cb_ledger set descs = 'Pendapatan Mtc. Fee unit VIV-3/15 periode Januari 2024'
+where entity_cd = '0003' and doc_no = 'BM24010075' and module = 'CB'
+update mgr.cb_ledger_dtl set descs = 'Pendapatan Mtc. Fee unit VIV-3/15 periode Januari 2024'
+where entity_cd = '0003' and doc_no = 'BM24010075' and line_no = '1' and module = 'CB'
+update mgr.gl_postjnls set descs = 'Pendapatan Mtc. Fee unit VIV-3/15 periode Januari 2024'
+where entity_cd = '0003' and jlno = 'BM24010075' and line_no = '1'
+update mgr.gl_postjnls set descs = 'Pendapatan Mtc. Fee unit VIV-3/15 periode Januari 2024'
+where entity_cd = '0003' and jlno = 'BM24010075' and line_no = '1'
+
+
+select descs,* from mgr.cb_ledger 
+where entity_cd = '0003' and doc_no = 'BM24010075' 
+
+select descs,* from mgr.cb_ledger_dtl 
+where entity_cd = '0003' and doc_no = 'BM24010075'
+
+select remarks,* from mgr.gl_jlhdr_post 
+where entity_cd = '0003' and jlno = 'BM24010075'
+
+select descs,* from mgr.gl_postjnls
+where entity_cd = '0003' and jlno = 'BM24010075'
+ROLLBACK
