@@ -1,0 +1,30 @@
+BEGIN TRAN
+update mgr.ap_ledger set descs = 'Tagihan dari Biaya Internet Periode Juni 2024'
+where entity_cd = '0000' and batch_no = '16713' and trx_type = '2101'
+
+update mgr.ap_ledger set descs = 'BINET1#IV24060017#Tagihan dari Biaya Internet Periode Juni 2024'
+where entity_cd = '0000' and batch_no = '16713' and trx_type = '2902'
+
+select descs,* from mgr.ap_ledger 
+where entity_cd = '0000' and batch_no = '16713'
+ROLLBACK
+
+Begin Tran
+update mgr.ap_trxdt set doc_descs = 'BINET1#IV24060017#Tagihan dari Biaya Internet Periode Juni 2024'
+where entity_cd = '0000' and doc_no = 'WH24060014'
+
+select doc_descs,* from mgr.ap_trxdt
+where entity_cd = '0000' and doc_no = 'WH24060014'
+Rollback
+
+Begin Tran
+update mgr.gl_jlhdr_post set remarks = 'BINET1#IV24060017#Tagihan dari Biaya Internet Periode Juni 2024'
+where entity_cd = '0000' and jlno = 'WH24060014'
+
+select * from mgr.gl_jlhdr_post
+where entity_cd = '0000' and jlno = 'WH24060014'
+
+rollback
+
+select descs,* from mgr.gl_postjnls
+where entity_cd = '0000' and jlno in ('IV24060017','WH24060014')
