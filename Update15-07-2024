@@ -1,0 +1,22 @@
+
+
+Begin Tran
+update mgr.cb_ledger set acct_cd = '111.02.404', bank_cd = 'BANK HALTON'
+where entity_cd = '0108' and doc_no = 'BK24060014'
+
+update mgr.cb_ledger_dtl set bank_cd = 'BANK HALTON'
+where entity_cd = '0108' and doc_no = 'BK24060014' and line_no = '2'
+
+update mgr.gl_pendjnls set acct_cd = '111.02.404', bank_cd = 'BANK HALTON'
+where entity_cd = '0108' and jlno = 'BK24060014' and line_no = '2'
+
+select acct_cd,* from mgr.cb_ledger 
+where entity_cd = '0000' and doc_no = 'BK24060014' 
+
+select acct_cd,* from mgr.cb_ledger_dtl 
+where entity_cd = '0000' and doc_no = 'BK24060014'
+
+select acct_cd,* from mgr.gl_pendjnls
+where entity_cd = '0000' and jlno = 'BK24060014'
+
+ROLLBACK
