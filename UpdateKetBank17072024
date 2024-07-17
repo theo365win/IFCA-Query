@@ -1,0 +1,23 @@
+begin tran
+
+update mgr.gl_jlhdr_post set remarks = 'Biaya Adm Bank'
+where entity_cd = '0108' and jlno = 'BK24050014'
+
+update mgr.gl_postjnls set descs = 'Biaya Adm Bank'
+where entity_cd = '0108' and jlno = 'BK24050014' and line_no = '2'
+
+update mgr.cb_ledger_dtl set descs = 'Biaya Adm Bank'
+where entity_cd = '0108' and doc_no = 'BK24050014' and line_no = '2'
+
+select descs,* from mgr.gl_postjnls 
+where entity_cd = '0108' and jlno = 'BK24050014'
+
+select remarks,* from mgr.gl_jlhdr_post
+where entity_cd = '0108' and jlno = 'BK24050014'
+
+select descs,* from mgr.cb_ledger 
+where entity_cd = '0108' and doc_no = 'BK24050014'
+
+select descs,* from mgr.cb_ledger_dtl
+where entity_cd = '0108' and doc_no = 'BK24050014'
+rollback
