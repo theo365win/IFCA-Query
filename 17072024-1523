@@ -1,0 +1,14 @@
+begin tran
+update mgr.gl_jlhdr_post set jldate = '2024-06-06 00:00:00.000'
+where entity_cd = '0111' and jlno = 'JM24060001'
+
+update mgr.gl_postjnls set jldate = '2024-06-06 00:00:00.000'
+where entity_cd = '0111' and jlno = 'JM24060001' and line_no in ('1','2')
+
+select jldate,* from mgr.gl_jlhdr_post
+where entity_cd = '0111' and jlno = 'JM24060001'
+
+select jldate,* from mgr.gl_postjnls
+where entity_cd = '0111' and jlno = 'JM24060001'
+rollback
+ 
