@@ -1,0 +1,32 @@
+
+
+Begin Tran
+
+update mgr.cb_ledger set local_amt = '20000', foreign_amt = '20000', bank_base_amt = '20000'
+where entity_cd = '0113' and doc_no = 'BK24060117'
+
+update mgr.cb_ledger_dtl set local_amt = '20000', foreign_amt = '20000'
+where entity_cd = '0113' and doc_no = 'BK24060117'
+
+update mgr.gl_jlhdr_post set trx_amt = '20000'
+where entity_cd = '0113' and jlno = 'BK24060117'
+
+update mgr.gl_postjnls set trx_amt = '-20000'
+where entity_cd = '0113' and jlno = 'BK24060117' and line_no = '2'
+
+update mgr.gl_postjnls set trx_amt = '20000'
+where entity_cd = '0113' and jlno = 'BK24060117' and line_no = '1'
+
+select local_amt, foreign_amt, bank_base_amt,* from mgr.cb_ledger 
+where entity_cd = '0113' and doc_no = 'BK24060117' 
+
+select local_amt, foreign_amt,* from mgr.cb_ledger_dtl 
+where entity_cd = '0113' and doc_no = 'BK24060117'
+
+select trx_amt,* from mgr.gl_jlhdr_post
+where entity_cd = '0113' and jlno = 'BK24060117'
+
+select trx_amt,* from mgr.gl_postjnls
+where entity_cd = '0113' and jlno = 'BK24060117'
+
+ROLLBACK
