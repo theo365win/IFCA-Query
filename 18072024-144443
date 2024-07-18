@@ -1,0 +1,44 @@
+
+begin tran
+update mgr.ap_ledger set entity_cd = 'INSE'
+WHERE entity_cd = '0000' and doc_no = 'IV24060028'
+
+update mgr.ap_trxdt set entity_cd = 'INSE'
+WHERE entity_cd = '0000' and doc_no = 'IV24060028'
+
+update mgr.ap_taxdt set entity_cd = 'INSE'
+WHERE entity_cd = '0000' and doc_no = 'IV24060028'
+
+update mgr.gl_jlhdr set entity_cd = 'INSE'
+where entity_cd = '0000' and jlno = 'IV24060028'
+
+update mgr.gl_pendjnls set entity_cd = 'INSE'
+where entity_cd = '0000' and jlno = 'IV24060028'
+
+SELECT doc_no,wth_ia_doc,* FROM mgr.ap_ledger  
+WHERE entity_cd = 'INSE' and doc_no = 'IV24060028'
+
+SELECT * FROM mgr.ap_trxdt 
+WHERE entity_cd = '0000' and doc_no = 'IV24060028'
+
+select * from mgr.ap_taxdt
+WHERE entity_cd = '0000' and doc_no = 'IV24060028'
+
+select * from mgr.gl_jlhdr
+where entity_cd = 'INSE' and jlno = 'IV24060028'
+
+select * from mgr.gl_pendjnls
+where entity_cd = '0000' and jlno = 'IV24060028'
+
+rollback
+
+
+
+--SELECT * FROM mgr.gl_postjnls 
+--WHERE entity_cd = '0000' and jlno = 'IV24060028'
+--select * from mgr.gl_jlhdr_post
+--where entity_cd = '0000' and jlno = 'IV24060028'
+--select * from mgr.gl_postjnls
+--where entity_cd = '0000' and jlno = 'IV24060028'
+--select * from mgr.ap_alloc 
+--WHERE entity_cd = '0000' order by cr_doc and cr_doc = 'IV24060028'
