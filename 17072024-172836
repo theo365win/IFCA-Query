@@ -1,0 +1,13 @@
+begin tran
+update mgr.cb_ledger_dtl set bank_cd = 'NIAGA4000'
+where entity_cd = '0113' and doc_no = 'BK24060081' and line_no = '2'
+
+update mgr.gl_postjnls set acct_cd = '111.02.926', bank_cd = 'NIAGA4000'
+where entity_cd = '0113' and jlno = 'BK24060081' and line_no = '2'
+
+select acct_cd,* from mgr.cb_ledger_dtl  
+where entity_cd = '0113' and doc_no = 'BK24060081'
+
+select acct_cd,* from mgr.gl_postjnls  
+where entity_cd = '0113' and jlno = 'BK24060081'
+rollback
