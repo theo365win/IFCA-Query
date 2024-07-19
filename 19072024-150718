@@ -1,0 +1,20 @@
+begin tran
+update mgr.cb_ledger_dtl set acct_cd = '610.12.000'
+where entity_cd = '0000' and doc_no = 'KK24060003' and line_no = '1'
+
+update mgr.gl_postjnls set acct_cd = '610.12.000'
+where entity_cd = '0000' and jlno = 'KK24060003' and line_no = '1'
+
+update mgr.cb_petty_dtl set acct_cd = '610.12.000'
+where entity_cd = '0000' and doc_no = 'KK24060003' and line_no = '1'
+
+select acct_cd,* from mgr.cb_ledger_dtl
+where entity_cd = '0000' and doc_no = 'KK24060003'
+
+select acct_cd,* from mgr.gl_postjnls
+where entity_cd = '0000' and jlno = 'KK24060003'
+
+select * from mgr.cb_petty_dtl
+where entity_cd = '0000' and doc_no = 'KK24060003'
+
+rollback
