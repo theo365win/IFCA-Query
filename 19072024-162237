@@ -1,0 +1,26 @@
+--SELECT doc_no,wth_ia_doc,* FROM mgr.ap_ledger  
+--WHERE entity_cd = '0000' and doc_no = 'IV24060030'
+
+--SELECT * FROM mgr.ap_ledger 
+--WHERE entity_cd = '0000' and wth_ia_doc = 'IV24060030'
+
+--select * from mgr.ap_alloc 
+--WHERE entity_cd = '0000' and cr_doc = 'IV24060030'
+
+--SELECT * FROM mgr.ap_taxdt
+--WHERE entity_cd = '0000' and doc_no = 'IV24060030'
+
+begin tran
+Update mgr.ap_trxdt set gl_acct = '710.06.006'
+WHERE entity_cd = '0000' and doc_no = 'IV24060030' and line_no = '3'
+
+update mgr.gl_postjnls set acct_cd = '710.06.006'
+WHERE entity_cd = '0000' and jlno = 'IV24060030' and line_no = '5'
+
+SELECT gl_acct,* FROM mgr.ap_trxdt 
+WHERE entity_cd = '0000' and doc_no = 'IV24060030'
+
+SELECT acct_cd,* FROM mgr.gl_postjnls 
+WHERE entity_cd = '0000' and jlno = 'IV24060030'
+rollback
+
