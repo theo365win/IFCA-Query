@@ -1,0 +1,27 @@
+begin tran
+
+--update mgr.gl_postjnls set descs = 'Titipan BF V-12A (Agency)(Antonio)'
+--where entity_cd = '0113' and jlno = 'BM24060051' 
+
+--update mgr.gl_jlhdr_post set remarks = 'Titipan BF V-12A (Agency)(Antonio)'
+--where entity_cd = '0113' and jlno = 'BM24060051'
+
+--update mgr.cb_ledger set descs = 'Titipan BF V-12A (Agency)(Antonio)'
+--where entity_cd = '0113' and doc_no = 'BM24060051'
+
+--update mgr.cb_ledger_dtl set descs = 'Titipan BF V-12A (Agency)(Antonio)'
+--where entity_cd = '0113' and doc_no = 'BM24060051'
+
+select descs,* from mgr.gl_postjnls 
+where entity_cd = '0113' and jlno = 'BM24060051'
+
+select remarks,* from mgr.gl_jlhdr_post
+where entity_cd = '0113' and jlno = 'BM24060051'
+
+select descs,* from mgr.cb_ledger 
+where entity_cd = '0113' and doc_no = 'BM24060051'
+
+select descs,* from mgr.cb_ledger_dtl
+where entity_cd = '0113' and doc_no = 'BM24060051'
+
+rollback
