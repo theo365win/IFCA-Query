@@ -1,0 +1,15 @@
+Begin Tran
+
+update mgr.cb_ledger_dtl set bank_cd = '610.21.027', acct_cd = '610.21.027'
+where entity_cd = '0113' and doc_no = 'BK24060088' and line_no = '1'
+
+update mgr.gl_postjnls set acct_cd = '610.21.027'
+where entity_cd = '0113' and jlno = 'BK24060088' and line_no = '1'
+
+select descs,* from mgr.cb_ledger_dtl
+where entity_cd = '0113' and doc_no = 'BK24060088'
+
+select descs,* from mgr.gl_postjnls
+where entity_cd = '0113' and jlno = 'BK24060088'
+
+ROLLBACK
