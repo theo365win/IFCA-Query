@@ -1,0 +1,15 @@
+Begin Tran
+
+update mgr.cb_ledger_dtl set bank_cd = '710.06.006', acct_cd = '710.06.006'
+where entity_cd = '0103' and doc_no = 'KK24070004' and line_no = '2'
+
+update mgr.gl_postjnls set acct_cd = '710.06.006'
+where entity_cd = '0103' and jlno = 'KK24070004' and line_no = '2'
+
+select acct_cd,bank_cd,* from mgr.cb_ledger_dtl
+where entity_cd = '0103' and doc_no = 'KK24070004'
+
+select acct_cd,* from mgr.gl_postjnls
+where entity_cd = '0103' and jlno = 'KK24070004'
+
+ROLLBACK
