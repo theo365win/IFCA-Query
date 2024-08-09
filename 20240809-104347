@@ -1,0 +1,19 @@
+BEGIN TRAN
+
+update mgr.cb_ledger set descs = 'Pendapatan Mtc. Fee unit CARD-2 periode Maret - Juni 2024'
+where entity_cd = '0003' and doc_no = 'BM24050039'
+update mgr.cb_ledger_dtl set descs = 'Pendapatan Mtc. Fee unit CARD-2 periode Maret - Juni 2024'
+where entity_cd = '0003' and doc_no = 'BM24050039'
+update mgr.gl_jlhdr_post set remarks = 'Pendapatan Mtc. Fee unit CARD-2 periode Maret - Juni 2024'
+where entity_cd = '0003' and jlno = 'BM24050039'
+update mgr.gl_postjnls set descs = 'Pendapatan Mtc. Fee unit CARD-2 periode Maret - Juni 2024'
+where entity_cd = '0003' and jlno = 'BM24050039'
+
+select descs,* from mgr.cb_ledger
+where entity_cd = '0003' and doc_no = 'BM24050039'
+select descs,* from mgr.cb_ledger_dtl
+where entity_cd = '0003' and doc_no = 'BM24050039'
+select remarks,* from mgr.gl_jlhdr_post
+where entity_cd = '0003' and jlno = 'BM24050039'
+select descs,* from mgr.gl_postjnls
+where entity_cd = '0003' and jlno = 'BM24050039'
