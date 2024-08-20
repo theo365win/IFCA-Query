@@ -1,0 +1,25 @@
+begin tran
+update mgr.cb_ledger set acct_cd = '111.02.944', bank_cd = 'MANDIRI5820'
+where entity_cd = '0003' and doc_no = 'BM24080005'
+
+update mgr.cb_ledger_dtl  set bank_cd = 'MANDIRI5820'
+where entity_cd = '0003' and doc_no = 'BM24080005' and line_no = '1'
+
+update mgr.gl_pendjnls set acct_cd = '111.02.944', bank_cd = 'MANDIRI5820'
+where entity_cd = '0003' and jlno = 'BM24080005' and line_no = '1'
+
+select acct_cd, bank_cd,* from mgr.cb_ledger
+where entity_cd = '0003' and doc_no = 'BM24080005'
+
+select acct_cd, bank_cd,* from mgr.cb_ledger_dtl  
+where entity_cd = '0003' and doc_no = 'BM24080005' order by line_no
+
+--select acct_cd,* from mgr.gl_postjnls  
+--where entity_cd = '0003' and jlno = 'BM24080005'
+
+select acct_cd, bank_cd,* from mgr.gl_pendjnls  
+where entity_cd = '0003' and jlno = 'BM24080005' order by line_no
+
+--select * from mgr.gl_jlhdr_post
+--where entity_cd = '0003' and jlno = 'BM24080005'
+rollback
