@@ -1,0 +1,53 @@
+---------------------------------------------------------------------------------------
+-- Urutkan Nomor Pajak hufft
+begin tran
+
+--Hide Tax_Invoice_Trans 
+update mgr.ar_tax_invoice_trans set entity_cd = 'YELA'
+where entity_cd = '0115' 
+AND alloc_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+
+select * from mgr.ar_tax_invoice_trans
+where entity_cd = '0115' 
+AND alloc_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+rollback
+----------------------------------------------------------------------------------------
+
+-- Hide GL_Postglns
+update mgr.gl_postjnls set entity_cd = 'YELA'
+where entity_cd = '0115'
+and ref_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+
+select * from mgr.gl_postjnls
+where entity_cd = '0115'
+and ref_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+order by jlno
+
+----------------------------------------------------------------------------------------
+-- Null Tax_Invoice_No and NPWP
+begin tran
+
+-- Update Null Tax_No_Invoice and NPWP
+update mgr.ar_tax_billsch_cash_basis set tax_invoice_no = NULL,npwp = NULL
+where entity_cd = '0115'
+AND alloc_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+
+select tax_invoice_no,npwp,* from mgr.ar_tax_billsch_cash_basis
+where entity_cd = '0115'
+AND alloc_no IN ('AL24070001','AL24070002','AL24070003','AL24070004')
+order by alloc_date
+
+rollback
+----------------------------------------------------------------------------------------
+begin tran
+-- Ganti Status Nomor Pajak Jadi N
+
+-- Update Status Tax_Number_Quota_Dt N
+update mgr.cf_tax_number_quota_dt set [status] = 'N'
+where npwp = '91.901.547.9-124.000'
+AND tax_inv_no in ('0052462779185','0052462779186','0052462779187','0052462779188','0052462779189')
+
+select * from mgr.cf_tax_number_quota_dt
+where npwp = '91.901.547.9-124.000'
+order by tax_inv_no
+rollback
