@@ -1,0 +1,62 @@
+Ganti/Salah Tanggal Di Sales Recognation
+
+BEGIN TRAN
+update mgr.gl_jlhdr set jldate = '31 Jul 2024', ref_date = '31 Jul 2024', aperiod = '7'
+where entity_cd = '0113' and jlno = 'SR24080001'
+
+select * from mgr.gl_jlhdr
+where entity_cd = '0113' and jlno = 'SR24080001'
+ROLLBACK
+-----------------------------------------------------------------------------------------
+BEGIN TRAN
+update mgr.gl_pendjnls set jldate = '31 Jul 2024'
+where entity_cd = '0113' and jlno = 'SR24080001'
+
+select * from mgr.gl_pendjnls
+where entity_cd = '0113' and jlno = 'SR24080001'
+ROLLBACK
+--select * from mgr.gl_postjnls
+--where entity_cd = '0113' and jlno = 'SR24080001'
+--S/R Ver. PSAK debtor A/C #BLOK-P/P-006/1#
+--select * from mgr.cf_document_ctl
+--where entity_cd = '0113' and prefix = 'SR'
+select * from mgr.cf_document_ctl_dtl
+where entity_cd = '0113' and prefix = 'SR' order by [year]
+
+
+-----------------------------------------------------------------------------------------------------
+BEGIN TRAN
+-- UPDATE SR_ACC_DATE
+update mgr.rl_sales set sr_acc_date = '31 Jul 2024'
+where debtor_acct = 'BLOK-P/P-006/1'
+
+-- SR_ACC_DATE
+select * from mgr.rl_sales 
+where debtor_acct = 'BLOK-P/P-006/1'
+
+ROLLBACK
+
+-----------------------------------------------------------------------------------------------------
+
+-- UPDATE SR_ACC_DATE
+BEGIN TRAN
+update mgr.pkp_unit_cogs set sr_acc_date = '31 Jul 2024'
+where entity_cd = '0113' and project_no = '0113003' and cluster_cd = 'BLOK-P' and lot_no = 'P-006'
+
+-- SR_ACC_DATE
+select * from mgr.pkp_unit_cogs
+where entity_cd = '0113' and project_no = '0113003' and cluster_cd = 'BLOK-P' and lot_no = 'P-006'
+ROLLBACK
+
+----------------------------------------------------------------------------------------------------
+
+-- UPDATE SR_ACC_DATE
+BEGIN TRAN
+update mgr.pkp_pl_cogs_lot set sr_acc_date = '31 Jul 2024'
+where entity_cd = '0113' and project_no = '0113003' and cluster_cd = 'BLOK-P' and property_cd = 'T-84' and lot_no = 'P-006'
+
+-- SR_ACC_DATE
+select * from mgr.pkp_pl_cogs_lot
+where entity_cd = '0113' and project_no = '0113003' and cluster_cd = 'BLOK-P' and property_cd = 'T-84' and lot_no = 'P-006'
+ROLLBACK
+
