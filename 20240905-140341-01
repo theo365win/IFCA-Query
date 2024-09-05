@@ -1,0 +1,28 @@
+--HAPUS BK
+begin tran
+update mgr.cb_ledger set entity_cd = 'DNDA'
+where entity_cd = '0002' and doc_no = 'BK24080029'
+update mgr.cb_ledger_dtl  set entity_cd = 'DNDA'
+where entity_cd = '0002' and doc_no = 'BK24080029'
+update mgr.gl_jlhdr  set entity_cd = 'DNDA'
+where entity_cd = '0002' and jlno = 'BK24080029'
+update mgr.gl_pendjnls  set entity_cd = 'DNDA'
+where entity_cd = '0002' and jlno = 'BK24080029'
+
+select * from mgr.cb_ledger
+where entity_cd = '0002' and doc_no = 'BK24080029'
+select * from mgr.cb_ledger_dtl  
+where entity_cd = '0002' and doc_no = 'BK24080029'
+--select * from mgr.cb_paytrx
+--where entity_cd = '0002' and doc_no = 'BK24080029
+
+
+--select acct_cd,* from mgr.gl_postjnls  
+--where entity_cd = '0002' and jlno = 'BK24080029'
+select * from mgr.gl_jlhdr  
+where entity_cd = '0002' and jlno = 'BK24080029'
+select * from mgr.gl_pendjnls  
+where entity_cd = '0002' and jlno = 'BK24080029'
+--select * from mgr.gl_postjnls
+--where entity_cd = '0002' and jlno = 'BK24080029'
+rollback
